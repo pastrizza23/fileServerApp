@@ -1,18 +1,24 @@
 """Logger module with config"""
 import logging
+from utils.config_parser import config
 
 
 class Logger:
     """Logger class with loaded handles"""
 
-    log_format = '%(asctime)s - %(levelname)s - %(message)s'
+    log_format = config()["logger"]["log_format"]
 
-    def __init__(self, stream=True):
+    def __init__(self, stream=True, debug=True):
         self.logger = logging.getLogger(__name__)
-        self.logger.setLevel('INFO')
+
+        if debug:
+            self.logger.setLevel('DEBUG')
+        else:
+            self.logger.setLevel(config()["logger"]["log_level"])
+
         self.formatter = logging.Formatter(self.log_format)
 
-        self.file_handler = logging.FileHandler("logs.log")
+        self.file_handler = logging.FileHandler(config()["logger"]["log_file"])
         self.file_handler.setFormatter(self.formatter)
         self.logger.addHandler(self.file_handler)
 

@@ -5,7 +5,7 @@ from pathlib import Path
 
 from utils.utils import generate_data
 from utils.logger import logger
-from src.config_parser import config
+from utils.config_parser import config
 
 
 def create_file(filename: str) -> bool:
@@ -55,11 +55,11 @@ def get_metadata(filename: str) -> dict:
         file_format = file_name.split('.')[-1]
         file_size = file_stats.st_size
         creation_date = datetime.datetime.fromtimestamp(file_stats.st_ctime)\
-            .strftime(config()["date_format"])
+            .strftime(config()["base"]["date_format"])
         access_date = datetime.datetime.fromtimestamp(file_stats.st_atime)\
-            .strftime(config()["date_format"])
+            .strftime(config()["base"]["date_format"])
         modification_date = datetime.datetime.fromtimestamp(file_stats.st_mtime)\
-            .strftime(config()["date_format"])
+            .strftime(config()["base"]["date_format"])
 
         logger.info(f"Read metadata from {filename}")
 

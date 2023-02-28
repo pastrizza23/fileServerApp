@@ -1,4 +1,12 @@
 {
-  "ascii_and_digits": "abcdefghijklmnopqrstuvwxyz0123456789",
-  "date_format": "%Y-%m-%d %H:%M:%S"
+  "base": {
+    "ascii_and_digits": "abcdefghijklmnopqrstuvwxyz0123456789",
+    "data_length": 100,
+    "date_format": "%Y-%m-%d %H:%M:%S"
+  } ,
+  "logger": {
+    "log_format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "log_level": "INFO",
+    "log_file": "app.log"
+  }
 }

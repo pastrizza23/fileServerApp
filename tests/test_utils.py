@@ -1,11 +1,12 @@
+""""Test with pytest for utils"""
 import utils.utils as utils
 import src.file_service as fs
-""""Test with pytest for utils"""
+from utils.config_parser import config
 
 
 def test_generate_data():
-    """Test if generated data eq 100"""
-    assert len(utils.generate_data()) == 100
+    """Test if generated data eq configured len"""
+    assert len(utils.generate_data()) == config()["base"]["data_length"]
 
 
 def test_get_metadata(tmpdir):

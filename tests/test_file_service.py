@@ -1,12 +1,12 @@
-import src.file_service as fs
 """Test with pytest for file services"""
+import src.file_service as fs
 
 
 def test_create_file(tmpdir):
     """Test file creation capability"""
     file = tmpdir.join("test.txt")
     fs.create_file(file.strpath)
-    file.read()
+    assert file.read()
 
 
 def test_delete_no_existing_file():
