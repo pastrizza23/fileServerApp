@@ -4,12 +4,16 @@
     "data_length": 100,
     "date_format": "%Y-%m-%d %H:%M:%S"
   } ,
+  "app": {
+    "file_folder": "files"
+  },
   "logger": {
     "log_format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     "log_level": "INFO",
     "log_file": "app.log"
   } ,
   "crypto": {
-    "secret_key": "mySecretToken"
+    "secret_key": "mySecretToken",
+    "AES_key": "e95ccb064599caa5afd26d11db28845f"
   }
 }

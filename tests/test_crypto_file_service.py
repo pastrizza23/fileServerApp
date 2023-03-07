@@ -1,5 +1,4 @@
 """Test with pytest for file services"""
-import pytest
 from src.crypto_file_service import CryptoFileService as fs
 
 

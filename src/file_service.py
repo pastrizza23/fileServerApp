@@ -10,11 +10,14 @@ from utils.config_parser import config
 
 class FileService:
     """Class for basic file operations"""
+    FILE_PATH = config()["app"]["file_folder"]
+
     @staticmethod
     def create_file(filename: str) -> bool:
         """Create file with provided filename and random data"""
         try:
-            with open(filename, 'w', encoding="utf-8") as file:
+            path = os.path.join(FileService.FILE_PATH, filename)
+            with open(os.path.abspath(path), 'w', encoding="utf-8") as file:
                 file.write(generate_data())
                 logger.info(f"Create {filename} with random data")
                 return True
@@ -26,7 +29,8 @@ class FileService:
     def delete_file(filename: str) -> bool:
         """Delete specified filename"""
         try:
-            os.remove(filename)
+            path = os.path.join(FileService.FILE_PATH, filename)
+            os.remove(os.path.abspath(path))
             logger.info(f"Remove {filename}")
             return True
         except FileNotFoundError:
@@ -37,7 +41,8 @@ class FileService:
     def read_file(filename: str) -> str:
         """Read file and return it content"""
         try:
-            with open(filename, encoding="utf-8") as file:
+            path = os.path.join(FileService.FILE_PATH, filename)
+            with open(os.path.abspath(path), encoding="utf-8") as file:
                 content = file.read()
                 logger.info(f"Read from {filename}")
                 logger.debug(f"Content : {content}")
@@ -53,8 +58,8 @@ class FileService:
     def get_metadata(filename: str) -> dict:
         """Gather and return metadata about file"""
         try:
-            file_stats = os.stat(filename)
-            file_name = Path(filename).name
+            file_stats = os.stat(os.path.abspath(filename))
+            file_name = Path(os.path.abspath(filename)).name
             file_format = file_name.split('.')[-1]
             file_size = file_stats.st_size
             creation_date = datetime.datetime.fromtimestamp(file_stats.st_ctime)\
