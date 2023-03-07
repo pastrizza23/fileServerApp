@@ -8,5 +8,8 @@
     "log_format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     "log_level": "INFO",
     "log_file": "app.log"
+  } ,
+  "crypto": {
+    "secret_key": "mySecretToken"
   }
 }

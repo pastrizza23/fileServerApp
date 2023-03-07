@@ -1,6 +1,6 @@
 """"Test with pytest for utils"""
 import utils.utils as utils
-import src.file_service as fs
+from src.file_service import FileService as fs
 from utils.config_parser import config
 
 

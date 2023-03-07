@@ -1,5 +1,5 @@
 """Test with pytest for file services"""
-import src.file_service as fs
+from src.file_service import FileService as fs
 
 
 def test_create_file(tmpdir):
