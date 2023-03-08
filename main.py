@@ -1,7 +1,10 @@
 """Main module for working from cli"""
 import argparse
 from src.crypto_file_service import CryptoFileService as fs
+from src.handler import app
 from utils import utils
+from utils.config_parser import get_config_file
+
 
 
 parser = argparse.ArgumentParser(description='App for working with files.')
@@ -15,6 +18,9 @@ read = subparser.add_parser('read', description='Reads content of given file.',
 metadata = subparser.add_parser('metadata', description="Returns file's metadata.",
                                 help="Returns file's metadata.")
 
+server = subparser.add_parser('start-server', description="Start API service",
+                                help="Start API Service")
+
 create.add_argument("--filename", '-f', required=True, type=str, help="Filename to be created")
 create.add_argument("--sign", "-s", action='count', help="Create file signature hash file")
 create.add_argument("--encrypt", "-e", action='count', help="Create encrypt version of file")
@@ -26,6 +32,10 @@ read.add_argument("--integrity", "-i", action='count', help="Verify file integri
 read.add_argument("--decrypt", "-d", action='count', help="Create file signature hash file")
 
 metadata.add_argument("--filename", '-f', required=True, type=str, help="Filename")
+
+server.add_argument("--port", '-p', type=int, default='5000', help='Port to run on')
+server.add_argument("--debug", '-d', type=bool, default=True, help='Debug mode')
+
 
 args = parser.parse_args()
 
@@ -48,3 +58,5 @@ if __name__ == "__main__":
         print(fs.read_file(args.filename))
     elif args.command == "metadata":
         utils.metadata_str(fs.get_metadata(args.metadata))
+    elif args.command == "start-server":
+        app.run(debug=args.debug, port=args.port, use_reloader=True, extra_files=[get_config_file(), ])
