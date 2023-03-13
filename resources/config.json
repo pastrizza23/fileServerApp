@@ -15,5 +15,11 @@
   "crypto": {
     "secret_key": "mySecretToken",
     "AES_key": "e95ccb064599caa5afd26d11db28845f"
+  },
+  "auth": {
+    "dbname": "authdb_dev",
+    "dbuser": "auth_user",
+    "dbpassword": "auth_123",
+    "secret_key": "gi4uh7SHfu6h5iou"
   }
 }

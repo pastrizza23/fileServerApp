@@ -10,13 +10,13 @@ from utils.config_parser import config
 
 class FileService:
     """Class for basic file operations"""
-    FILE_PATH = config()["app"]["file_folder"]
 
     @staticmethod
     def create_file(filename: str) -> bool:
         """Create file with provided filename and random data"""
         try:
-            path = os.path.join(FileService.FILE_PATH, filename)
+            file_path = config()["app"]["file_folder"]
+            path = os.path.join(file_path, filename)
             with open(os.path.abspath(path), 'w', encoding="utf-8") as file:
                 file.write(generate_data())
                 logger.info(f"Create {filename} with random data")
@@ -29,7 +29,8 @@ class FileService:
     def delete_file(filename: str) -> bool:
         """Delete specified filename"""
         try:
-            path = os.path.join(FileService.FILE_PATH, filename)
+            file_path = config()["app"]["file_folder"]
+            path = os.path.join(file_path, filename)
             os.remove(os.path.abspath(path))
             logger.info(f"Remove {filename}")
             return True
@@ -41,7 +42,8 @@ class FileService:
     def read_file(filename: str) -> str:
         """Read file and return it content"""
         try:
-            path = os.path.join(FileService.FILE_PATH, filename)
+            file_path = config()["app"]["file_folder"]
+            path = os.path.join(file_path, filename)
             with open(os.path.abspath(path), encoding="utf-8") as file:
                 content = file.read()
                 logger.info(f"Read from {filename}")

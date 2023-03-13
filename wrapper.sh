@@ -2,6 +2,6 @@
 
 pip install -r requirements.txt
 
-pylint src utils
+pylint src utils auth
 
 pytest tests

@@ -6,7 +6,6 @@ from utils import utils
 from utils.config_parser import get_config_file
 
 
-
 parser = argparse.ArgumentParser(description='App for working with files.')
 subparser = parser.add_subparsers(dest="command", description="Choose a command")
 create = subparser.add_parser('create', description='Creates a file with given filename',
@@ -59,4 +58,4 @@ if __name__ == "__main__":
     elif args.command == "metadata":
         utils.metadata_str(fs.get_metadata(args.metadata))
     elif args.command == "start-server":
-        app.run(debug=args.debug, port=args.port, use_reloader=True, extra_files=[get_config_file(), ])
+        app.run(debug=args.debug, port=args.port)
